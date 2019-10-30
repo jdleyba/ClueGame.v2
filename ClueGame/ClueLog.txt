@@ -58,3 +58,6 @@ Room file format incorrect K, Kitchen, X
 Rows do not all have the same number of columns
 Room not defined Z
 Room file format incorrect K, Kitchen, X
+Rows do not all have the same number of columns
+Room not defined Z
+Room file format incorrect K, Kitchen, X
