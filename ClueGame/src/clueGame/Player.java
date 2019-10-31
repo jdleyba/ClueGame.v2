@@ -3,13 +3,18 @@ package clueGame;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
+import java.awt.Color;
+import java.lang.reflect.Field;
 
 public class Player {
 	// File names for the config files
 	private String playerConfigFile;
 	private String playerName;
 	private static Player theInstance = new Player();
-
+	private Color playerColor;
+	private boolean isHuman;
+	private char roomInitial;
+	
 
 	private Player() {
 	}
@@ -34,7 +39,34 @@ public class Player {
 		FileReader in = new FileReader(playerConfigFile);
 		Scanner playerConfig = new Scanner(in);
 		
+		playerName = playerConfig.nextLine();
+		String color = playerConfig.nextLine();
+		playerColor = convertColor(color);
+		String humanBool = playerConfig.nextLine();
+		String roomName = playerConfig.nextLine();
+		
+		if(humanBool.equals("Human")) {
+			isHuman = true;
+		}
+		else {
+			isHuman = false;
+		}
+		
+		roomInitial = roomName.charAt(0);
+		
 	}
+
+	public Color convertColor(String strColor) {
+		 Color color;
+		 try {
+		 // We can use reflection to convert the string to a color
+		 Field field = Class.forName("java.awt.Color").getField(strColor.trim());
+		 color = (Color)field.get(null);
+		 } catch (Exception e) {
+		 color = null; // Not defined
+		 }
+		 return color;
+		}
 
 	
 
@@ -44,18 +76,19 @@ public class Player {
 	}
 
 	public Object getRoomInitial() {
-		// TODO Auto-generated method stub
-		return null;
+		return roomInitial;
 	}
 
 	public Object getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return playerName;
 	}
 
 	public Object isHuman() {
-		// TODO Auto-generated method stub
-		return null;
+		return isHuman;
+	}
+
+	public Object getColor() {
+		return playerColor;
 	}
 
 }
