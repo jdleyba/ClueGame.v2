@@ -12,18 +12,25 @@ import java.lang.reflect.Field;
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.Player;
+import clueGame.computerPlayer;
+import clueGame.humanPlayer;
 
-public class HumanTests {
+public class PlayerTests {
 	
 	
-	private static Player playerHuman;
+	private static Player playerHuman = new humanPlayer();
+	private static Player playerComputer = new computerPlayer();
 	private static Board board;
 	
 	@BeforeClass 
 	public static void setUp() {
-		playerHuman = Player.getInstance();
+		
 		playerHuman.setConfigFile("CTest_PlayerHuman.txt");
 		playerHuman.initialize();
+		
+		
+		playerComputer.setConfigFile("CTest_PlayerComputer.txt");
+		playerComputer.initialize();
 		
 		board = Board.getInstance();
 		board.setConfigFiles("ClueLayout.csv", "ClueLegend.txt");
@@ -32,20 +39,27 @@ public class HumanTests {
 	@Test
 	public void testName() {
 		assertEquals("Mr Green Center", playerHuman.getName());
+		assertEquals("Colonel Mines Mustard", playerComputer.getName());
 	}
 	@Test
 	public void testHuman() {
 		assertEquals(true, playerHuman.isHuman());
+		assertEquals(false, playerComputer.isHuman());
 	}
 	@Test
 	public void testColor() {
 		Color green = convertColor("green");
 		assertEquals(green, playerHuman.getColor());
+		Color yellow = convertColor("yellow");
+		assertEquals(yellow, playerComputer.getColor());
 	}
 	@Test
 	public void testStartLocation() {
 		BoardCell cellH = board.getCellAt(playerHuman.getStartRow(),playerHuman.getStartColumn());
 		assertEquals(cellH.getInitial(), playerHuman.getRoomInitial());
+		
+		BoardCell cellC = board.getCellAt(playerComputer.getStartRow(),playerComputer.getStartColumn());
+		assertEquals(cellC.getInitial(), playerComputer.getRoomInitial());
 	}
 	public Color convertColor(String strColor) {
 		 Color color;

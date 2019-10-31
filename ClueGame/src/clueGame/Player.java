@@ -10,7 +10,6 @@ public class Player {
 	// File names for the config files
 	private String playerConfigFile;
 	private String playerName;
-	private static Player theInstance = new Player();
 	private Color playerColor;
 	private boolean isHuman;
 	private char roomInitial;
@@ -18,12 +17,8 @@ public class Player {
 	private int startColumn;
 	
 
-	private Player() {
+	public Player() {
 	}
-
-	public static Player getInstance(){
-			return theInstance;
-		}
 	
 	public void setConfigFile(String playerConfig) {
 		playerConfigFile = playerConfig;
