@@ -12,14 +12,14 @@ import clueGame.Player;
 
 public class PlayerTests {
 	
-	private static Player player;
+	private static Player playerComputer;
 	private static Board board;
 	
 	@BeforeClass 
 	public static void setUp() {
-		player = Player.getInstance();
-		player.setConfigFile("CTest_Player.txt");
-		player.initialize();
+		playerComputer = Player.getInstance();
+		playerComputer.setConfigFile("CTest_PlayerComputer.txt");
+		playerComputer.initialize();
 		
 		board = Board.getInstance();
 		board.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");
@@ -27,15 +27,15 @@ public class PlayerTests {
 	}
 	@Test
 	public void testName() {
-		assertEquals("Colonel Mines Mustard", player.getName());
+		assertEquals("Colonel Mines Mustard", playerComputer.getName());
 	}
 	@Test
 	public void testHuman() {
-		assertEquals(false, player.isHuman());
+		assertEquals(false, playerComputer.isHuman());
 	}
 	@Test
 	public void testStartLocation() {
-		BoardCell cell = player.getStartLocation();
-		assertEquals(cell.getInitial(), player.getRoomInitial());
+		BoardCell cell = playerComputer.getStartLocation();
+		assertEquals(cell.getInitial(), playerComputer.getRoomInitial());
 	}
 }
