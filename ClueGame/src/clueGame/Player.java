@@ -17,7 +17,12 @@ public class Player {
 	private int startColumn;
 	
 
+<<<<<<< HEAD
 	public Player() {
+=======
+	private Player() {
+		
+>>>>>>> 8a12aa6499b011b4bbe484c4b4b68dcec05d95c4
 	}
 	
 	public void setConfigFile(String playerConfig) {
