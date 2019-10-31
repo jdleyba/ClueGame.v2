@@ -19,6 +19,7 @@ public class Player {
 	
 
 	private Player() {
+		
 	}
 
 	public static Player getInstance(){
