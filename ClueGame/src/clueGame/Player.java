@@ -14,6 +14,8 @@ public class Player {
 	private Color playerColor;
 	private boolean isHuman;
 	private char roomInitial;
+	private int startRow;
+	private int startColumn;
 	
 
 	private Player() {
@@ -44,7 +46,10 @@ public class Player {
 		playerColor = convertColor(color);
 		String humanBool = playerConfig.nextLine();
 		String roomName = playerConfig.nextLine();
-		
+		String startPos = playerConfig.nextLine();
+		String[] toInt = startPos.split(",");
+		startRow = Integer.parseInt(toInt[0]);
+		startColumn = Integer.parseInt(toInt[1]);
 		if(humanBool.equals("Human")) {
 			isHuman = true;
 		}
@@ -70,9 +75,11 @@ public class Player {
 
 	
 
-	public BoardCell getStartLocation() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getStartRow() {
+		return startRow;
+	}
+	public int getStartColumn() {
+		return startColumn;
 	}
 
 	public Object getRoomInitial() {

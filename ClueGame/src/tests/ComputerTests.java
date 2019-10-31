@@ -43,8 +43,8 @@ public class ComputerTests {
 	}
 	@Test
 	public void testStartLocation() {
-		BoardCell cellC = playerComputer.getStartLocation();
-		assertEquals(cellC.getInitial(), playerComputer.getRoomInitial());
+		BoardCell cellH = board.getCellAt(playerComputer.getStartRow(),playerComputer.getStartColumn());
+		assertEquals(cellH.getInitial(), playerComputer.getRoomInitial());
 	}
 	public Color convertColor(String strColor) {
 		 Color color;

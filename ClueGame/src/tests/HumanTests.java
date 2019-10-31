@@ -44,7 +44,7 @@ public class HumanTests {
 	}
 	@Test
 	public void testStartLocation() {
-		BoardCell cellH = playerHuman.getStartLocation();
+		BoardCell cellH = board.getCellAt(playerHuman.getStartRow(),playerHuman.getStartColumn());
 		assertEquals(cellH.getInitial(), playerHuman.getRoomInitial());
 	}
 	public Color convertColor(String strColor) {
