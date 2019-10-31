@@ -13,6 +13,7 @@ import clueGame.Player;
 public class PlayerTests {
 	
 	private static Player playerComputer;
+	private static Player playerHuman;
 	private static Board board;
 	
 	@BeforeClass 
@@ -20,6 +21,10 @@ public class PlayerTests {
 		playerComputer = Player.getInstance();
 		playerComputer.setConfigFile("CTest_PlayerComputer.txt");
 		playerComputer.initialize();
+		
+		playerHuman = Player.getInstance();
+		playerHuman.setConfigFile("CTest_PlayerComputer.txt");
+		playerHuman.initialize();
 		
 		board = Board.getInstance();
 		board.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");
