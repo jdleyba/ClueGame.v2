@@ -20,7 +20,7 @@ public class Cards {
 	private Map<Integer, List<Cards>> playerHands;
 	
 	
-	private void weaonsMake() {
+	private void weaponsMake() {
 		int cardCount = 0;			//The current amount of cards in the array Weapons.
 		this.name = "Frying Pan";
 		weapons[cardCount] = this;
