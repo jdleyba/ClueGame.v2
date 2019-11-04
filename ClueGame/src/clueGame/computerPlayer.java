@@ -1,9 +1,18 @@
 package clueGame;
 
+import java.util.Set;
+
 public class computerPlayer extends Player {
 
 	public computerPlayer() {
-		// TODO Auto-generated constructor stub
 	}
+	public BoardCell pickLocation(Set<BoardCell> targets) {
+		return null;
+	}
+	public void makeAccusation() {
 
+	}
+	public void createSuggestion() {
+		
+	}
 }

@@ -17,17 +17,17 @@ import clueGame.humanPlayer;
 
 public class PlayerTests {
 	
-	
+	//This initialize a test player on the board were going to be using 
 	private static Player playerHuman = new humanPlayer();
 	private static Player playerComputer = new computerPlayer();
 	private static Board board;
 	
+	//The before takes in the files for setting up the board and players, which also checks to make sure the files are valid
 	@BeforeClass 
 	public static void setUp() {
 		
 		playerHuman.setConfigFile("CTest_PlayerHuman.txt");
 		playerHuman.initialize();
-		
 		
 		playerComputer.setConfigFile("CTest_PlayerComputer.txt");
 		playerComputer.initialize();
@@ -36,24 +36,24 @@ public class PlayerTests {
 		board.setConfigFiles("ClueLayout.csv", "ClueLegend.txt");
 		board.initialize();
 	}
-	@Test
+	@Test //test to make sure getName is loading the name properly
 	public void testName() {
 		assertEquals("Mr Green Center", playerHuman.getName());
 		assertEquals("Colonel Mines Mustard", playerComputer.getName());
 	}
-	@Test
+	@Test //tests to make you can differentiate between computer and human
 	public void testHuman() {
 		assertEquals(true, playerHuman.isHuman());
 		assertEquals(false, playerComputer.isHuman());
 	}
-	@Test
+	@Test //makes sure the strings are converted to color objects
 	public void testColor() {
 		Color green = convertColor("green");
 		assertEquals(green, playerHuman.getColor());
 		Color yellow = convertColor("yellow");
 		assertEquals(yellow, playerComputer.getColor());
 	}
-	@Test
+	@Test //makes sure the character is starting in the right room
 	public void testStartLocation() {
 		BoardCell cellH = board.getCellAt(playerHuman.getStartRow(),playerHuman.getStartColumn());
 		assertEquals(cellH.getInitial(), playerHuman.getRoomInitial());
@@ -61,6 +61,7 @@ public class PlayerTests {
 		BoardCell cellC = board.getCellAt(playerComputer.getStartRow(),playerComputer.getStartColumn());
 		assertEquals(cellC.getInitial(), playerComputer.getRoomInitial());
 	}
+	//converts string to color object
 	public Color convertColor(String strColor) {
 		 Color color;
 		 try {
