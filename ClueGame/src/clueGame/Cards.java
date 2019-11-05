@@ -73,5 +73,5 @@ public class Cards {
 			players[cardCount].cardType = CardType.PERSON;
 			cardCount--;
 	}
-}
+} // Test
 }
