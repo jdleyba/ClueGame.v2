@@ -3,7 +3,8 @@ package clueGame;
 import java.util.Set;
 
 public class computerPlayer extends Player {
-
+	private char lastVisited;
+	
 	public computerPlayer() {
 	}
 	public BoardCell pickLocation(Set<BoardCell> targets) {
@@ -14,5 +15,11 @@ public class computerPlayer extends Player {
 	}
 	public void createSuggestion() {
 		
+	}
+	public void updateLastVisited() {
+		
+	}
+	public char getLastVisited() {
+		return lastVisited;
 	}
 }
