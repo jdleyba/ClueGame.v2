@@ -15,7 +15,7 @@ public class Player {
 	private char roomInitial;
 	private int startRow;
 	private int startColumn;
-	
+	public BoardCell currentLocation;
 
 
 	public Player() {}
@@ -55,6 +55,8 @@ public class Player {
 		
 		roomInitial = roomName.charAt(0);
 		
+		BoardCell start = new BoardCell(startRow,startColumn, roomName.substring(0, 1));
+		currentLocation = start;
 	}
 
 	public Color convertColor(String strColor) {
@@ -92,6 +94,9 @@ public class Player {
 
 	public Object getColor() {
 		return playerColor;
+	}
+	public BoardCell getCurrentLocation() {
+		return currentLocation;
 	}
 
 }

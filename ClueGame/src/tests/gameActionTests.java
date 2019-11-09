@@ -46,12 +46,15 @@ public class gameActionTests {
 	}
 	@Test
 	public void selectTargetLocation() {
-		//Gets a set of targets to test
+		//Gets a set of targets to test 
+		board.findAllTargets(playerComputer.getCurrentLocation(), 6);
 		Set<BoardCell> targets = board.getTargets();
 		
 		//Tests to make sure the computers chosen cell is in targets
 		BoardCell cell = ((computerPlayer) playerComputer).pickLocation(targets);
 		assertTrue(targets.contains(cell));
+		
+		//This test ensures that if there is a room that hasn't been visited the computer picks that cell
 		Iterator<BoardCell> iterator = targets.iterator();
 		while(iterator.hasNext()) {
 			BoardCell cell2 = iterator.next();
@@ -62,5 +65,8 @@ public class gameActionTests {
 			}
 		}
 	}
-	
+	@Test
+	public void testSuggestion() {
+		
+	}
 }

@@ -6,7 +6,6 @@ import java.util.Set;
 public class computerPlayer extends Player {
 	private char lastVisited;
 	private BoardCell targetCell;
-	
 	public computerPlayer() {
 	}
 	public BoardCell pickLocation(Set<BoardCell> targets) {
@@ -46,4 +45,5 @@ public class computerPlayer extends Player {
 	public char getLastVisited() {
 		return lastVisited;
 	}
+	
 }
