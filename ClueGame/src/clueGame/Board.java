@@ -36,8 +36,8 @@ public class Board {
 	// Data structure used during path calculation
 	// Used an instance var for efficiency (since recursive call)
 	private Set<BoardCell> visited;
-	private Set<String> playerConfigFiles;
-	private Set<Player> players;
+	private ArrayList<String> playerConfigFiles =new ArrayList<String>();
+	private ArrayList<Player> players= new ArrayList<Player>();
 	private ArrayList<String> roomNames;
 
 	// variable used for singleton pattern
@@ -129,8 +129,10 @@ public class Board {
 		else {
 			player.setHuman(false);
 		}
-		
 		player.setRoomInitial(roomName.charAt(0));
+		
+		getPlayers().add(player);
+		playerConfig.close();
 	}
 	public Color convertColor(String strColor) {
 		 Color color;
@@ -415,5 +417,13 @@ public class Board {
 		// Initialize will load BOTH config files
 		board.initialize();
 
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
 	}
 }

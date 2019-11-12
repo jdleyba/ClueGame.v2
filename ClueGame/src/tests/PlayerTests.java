@@ -8,6 +8,7 @@ import org.junit.runners.JUnit4;
 
 import java.awt.Color;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 import clueGame.Board;
 import clueGame.BoardCell;
@@ -20,21 +21,21 @@ public class PlayerTests {
 	//This initialize a test player on the board were going to be using 
 	private static Player playerHuman = new humanPlayer();
 	private static Player playerComputer = new computerPlayer();
+	private static ArrayList<Player> players;
 	private static Board board;
 	
 	//The before takes in the files for setting up the board and players, which also checks to make sure the files are valid
 	@BeforeClass 
-	public static void setUp() {
-		
-		playerHuman.setConfigFile("CTest_PlayerHuman.txt");
-		playerHuman.initialize();
-		
-		playerComputer.setConfigFile("CTest_PlayerComputer.txt");
-		playerComputer.initialize();
-		
+	public static void setUp() {		
 		board = Board.getInstance();
 		board.setConfigFiles("ClueLayout.csv", "ClueLegend.txt");
+		board.setPlayerConfigFiles("CTest_PlayerComputer.txt");
+		board.setPlayerConfigFiles("CTest_PlayerHuman.txt");
 		board.initialize();
+		
+		players = board.getPlayers();
+		playerComputer = players.get(0);
+		playerHuman = players.get(1);
 	}
 	@Test //test to make sure getName is loading the name properly
 	public void testName() {
