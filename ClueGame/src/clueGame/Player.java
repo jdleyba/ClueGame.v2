@@ -20,59 +20,6 @@ public class Player {
 
 	public Player() {}
 
-	
-	public void setConfigFile(String playerConfig) {
-		playerConfigFile = playerConfig;
-	}
-	
-	public void initialize() {
-		try{
-			loadConfigFile();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
-	
-	private void loadConfigFile() throws FileNotFoundException, BadConfigFormatException{
-		FileReader in = new FileReader(playerConfigFile);
-		Scanner playerConfig = new Scanner(in);
-		
-		playerName = playerConfig.nextLine();
-		String color = playerConfig.nextLine();
-		playerColor = convertColor(color);
-		String humanBool = playerConfig.nextLine();
-		String roomName = playerConfig.nextLine();
-		String startPos = playerConfig.nextLine();
-		String[] toInt = startPos.split(",");
-		startRow = Integer.parseInt(toInt[0]);
-		startColumn = Integer.parseInt(toInt[1]);
-		if(humanBool.equals("Human")) {
-			isHuman = true;
-		}
-		else {
-			isHuman = false;
-		}
-		
-		roomInitial = roomName.charAt(0);
-		
-		BoardCell start = new BoardCell(startRow,startColumn, roomName.substring(0, 1));
-		currentLocation = start;
-	}
-
-	public Color convertColor(String strColor) {
-		 Color color;
-		 try {
-		 // We can use reflection to convert the string to a color
-		 Field field = Class.forName("java.awt.Color").getField(strColor.trim());
-		 color = (Color)field.get(null);
-		 } catch (Exception e) {
-		 color = null; // Not defined
-		 }
-		 return color;
-		}
-
-	
-
 	public int getStartRow() {
 		return startRow;
 	}
@@ -85,7 +32,7 @@ public class Player {
 	}
 
 	public Object getName() {
-		return playerName;
+		return getPlayerName();
 	}
 
 	public Object isHuman() {
@@ -93,10 +40,50 @@ public class Player {
 	}
 
 	public Object getColor() {
-		return playerColor;
+		return getPlayerColor();
 	}
 	public BoardCell getCurrentLocation() {
 		return currentLocation;
+	}
+
+
+	public String getPlayerName() {
+		return playerName;
+	}
+
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+
+	public Color getPlayerColor() {
+		return playerColor;
+	}
+
+
+	public void setPlayerColor(Color playerColor) {
+		this.playerColor = playerColor;
+	}
+
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+
+	public void setStartColumn(int startColumn) {
+		this.startColumn = startColumn;
+	}
+
+
+	public void setHuman(boolean isHuman) {
+		this.isHuman = isHuman;
+	}
+
+
+	public void setRoomInitial(char roomInitial) {
+		this.roomInitial = roomInitial;
 	}
 
 }

@@ -1,10 +1,13 @@
 package clueGame;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -33,7 +36,8 @@ public class Board {
 	// Data structure used during path calculation
 	// Used an instance var for efficiency (since recursive call)
 	private Set<BoardCell> visited;
-
+	private Set<String> playerConfigFiles;
+	private Set<Player> players;
 	private ArrayList<String> roomNames;
 
 	// variable used for singleton pattern
@@ -64,7 +68,9 @@ public class Board {
 		boardConfigFile = boardConfig;
 		roomConfigFile = roomConfig;
 	}
-
+	public void setPlayerConfigFiles(String playerConfig) {
+		playerConfigFiles.add(playerConfig);
+	}
 	/**
 	 * Initialize the game
 	 */
@@ -73,6 +79,7 @@ public class Board {
 		loadConfigFiles();
 		// Calculate the adjacency lists one time, so they are ready for calcTargets
 		// This must be called _after_ the board is loaded!
+		loadPlayerConfigFiles();
 		calcAdjacencies();
 	}
 
@@ -90,7 +97,52 @@ public class Board {
 			System.out.println(e.getMessage());
 		}
 	}
-
+	public void loadPlayerConfigFiles() {
+		Iterator<String> itr = playerConfigFiles.iterator();
+		
+		while(itr.hasNext()) {
+			try {
+				loadPlayerConfig(itr.next());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	public void loadPlayerConfig(String playerFile) throws FileNotFoundException, BadPlayerFormatException{
+		FileReader in = new FileReader(playerFile);
+		Scanner playerConfig = new Scanner(in);
+		Player player = new Player();
+		
+		player.setPlayerName(playerConfig.nextLine());
+		String color = playerConfig.nextLine();
+		player.setPlayerColor(convertColor(color));
+		String humanBool = playerConfig.nextLine();
+		String roomName = playerConfig.nextLine();
+		String startPos = playerConfig.nextLine();
+		String[] toInt = startPos.split(",");
+		player.setStartRow(Integer.parseInt(toInt[0]));
+		player.setStartColumn(Integer.parseInt(toInt[1]));
+		if(humanBool.equals("Human")) {
+			player.setHuman(true);
+		}
+		else {
+			player.setHuman(false);
+		}
+		
+		player.setRoomInitial(roomName.charAt(0));
+	}
+	public Color convertColor(String strColor) {
+		 Color color;
+		 try {
+		 // We can use reflection to convert the string to a color
+		 Field field = Class.forName("java.awt.Color").getField(strColor.trim());
+		 color = (Color)field.get(null);
+		 } catch (Exception e) {
+		 color = null; // Not defined
+		 }
+		 return color;
+		}
 	/**
 	 * Loads the room configuration data
 	 * 
