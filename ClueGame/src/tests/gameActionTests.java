@@ -39,10 +39,8 @@ public class gameActionTests {
 		board.initialize();
 		
 		playerHuman.setConfigFile("CTest_PlayerHuman.txt");
-		playerHuman.initialize();
-		
 		playerComputer.setConfigFile("CTest_PlayerComputer.txt");
-		playerComputer.initialize();
+
 	}
 	@Test
 	public void selectTargetLocation() {

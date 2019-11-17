@@ -9,6 +9,9 @@ import java.lang.reflect.Field;
 public class Player {
 	// File names for the config files
 	private String playerConfigFile;
+	
+
+
 	private String playerName;
 	private Color playerColor;
 	private boolean isHuman;
@@ -19,7 +22,14 @@ public class Player {
 
 
 	public Player() {}
+	
+	public String getConfigFile() {
+		return playerConfigFile;
+	}
 
+	public void setConfigFile(String playerConfigFile) {
+		this.playerConfigFile = playerConfigFile;
+	}
 	public int getStartRow() {
 		return startRow;
 	}
